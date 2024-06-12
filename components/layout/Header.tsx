@@ -1,10 +1,10 @@
 "use client";
 
+import { Menu, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Menu, Search } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { UserButton, useAuth } from "@clerk/nextjs";
 import { usePathname, useRouter } from "next/navigation";
@@ -27,7 +27,7 @@ const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
   return (
-    <div className="flex items-center justify-between p-4">
+    <div className="flex items-center justify-between p-4 ">
       <Link href="/">
         <Image src="/logo.png" alt="Logo" width={100} height={100} />
       </Link>
