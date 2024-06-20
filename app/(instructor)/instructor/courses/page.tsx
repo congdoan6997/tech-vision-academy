@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
+import { auth } from "@clerk/nextjs/server";
+const CoursesPage = async () => {
+  const { userId } = auth();
 
-const CoursesPage = () => {
   return (
     <div className="px-4 py-6">
       <Button asChild>
