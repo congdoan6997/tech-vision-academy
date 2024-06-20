@@ -8,7 +8,7 @@ const InstructorLayout = ({ children }: { children: React.ReactNode }) => {
       <Header />
       <div className="flex-1 flex">
         <Sidebar />
-        {children}
+        <div className="flex-1">{children}</div>
       </div>
     </div>
   );
