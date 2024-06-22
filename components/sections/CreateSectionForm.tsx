@@ -72,7 +72,19 @@ const CreateSectionForm = ({ course }: Props) => {
     }
   };
 
-  const onReorder = async () => {};
+  const onReorder = async (updateData: { id: string; position: number }[]) => {
+    try {
+      await axios.put(`/api/courses/${course.id}/sections/reorder`, {
+        list: updateData,
+      });
+      toast.success("Sections reordered successfully", {
+        description: new Date().toDateString(),
+      });
+    } catch (err) {
+      console.log("Failed to reorder sections", err);
+      toast.error("Something went wrong!");
+    }
+  };
   return (
     <div className="px-10 py-6">
       <div className="flex gap-5">

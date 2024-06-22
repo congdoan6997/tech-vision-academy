@@ -11,7 +11,7 @@ import { Grip, Pencil } from "lucide-react";
 interface Props {
   items: Section[];
   onEdit: (id: string) => void;
-  onReorder: () => void;
+  onReorder: (updateData: { id: string; position: number }[]) => void;
 }
 
 const SectionList = ({ items, onEdit, onReorder }: Props) => {
@@ -25,7 +25,29 @@ const SectionList = ({ items, onEdit, onReorder }: Props) => {
     setSections(items);
   }, [items]);
 
-  const onDragEnd = (result: DropResult) => {};
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) return;
+    const items = Array.from(sections);
+
+    const [reorderedItem] = items.splice(result.source.index, 1);
+
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    const startIndex = Math.min(result.source.index, result.destination.index);
+    const endIndex = Math.max(result.source.index, result.destination.index);
+
+    const updatedSections = items.slice(startIndex, endIndex + 1);
+
+    setSections(items);
+    onReorder(
+      updatedSections.map((section, index) => ({
+        id: section.id,
+        position: items.findIndex((s) => s.id === section.id),
+      }))
+    );
+  };
+
+  if (!isMounted) return null;
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
