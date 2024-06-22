@@ -54,7 +54,7 @@ const CourseBasicPage = async ({
   const isCompleted = requiredFields.every(Boolean);
 
   return (
-    <div className="px-10">
+    <div className="px-10 pb-10">
       <AlertBanner
         isCompleted={isCompleted}
         missingFieldsCount={missingFieldsCount}
@@ -70,7 +70,10 @@ const CourseBasicPage = async ({
             value: subCategory.id,
           })),
         }))}
-        levels={[]}
+        levels={levels.map((level) => ({
+          label: level.name,
+          value: level.id,
+        }))}
         isCompleted={false}
       />
     </div>

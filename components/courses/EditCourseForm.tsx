@@ -23,8 +23,8 @@ import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2, Trash } from "lucide-react";
-// import Delete from "../custom/Delete";
-// import PublishButton from "../custom/PublishButton";
+import Delete from "../custom/Delete";
+import PublishButton from "../custom/PublishButton";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -117,7 +117,7 @@ const EditCourseForm = ({
           ))}
         </div>
 
-        {/* <div className="flex gap-5 items-start">
+        <div className="flex gap-5 items-start">
           <PublishButton
             disabled={!isCompleted}
             courseId={course.id}
@@ -125,7 +125,7 @@ const EditCourseForm = ({
             page="Course"
           />
           <Delete item="course" courseId={course.id} />
-        </div> */}
+        </div>
       </div>
 
       <Form {...form}>
@@ -177,7 +177,8 @@ const EditCourseForm = ({
                 <FormControl>
                   <RichEditor
                     placeholder="What is this course about?"
-                    {...field}
+                    onChange={(value) => field.onChange(value)}
+                    value={field.value}
                   />
                 </FormControl>
                 <FormMessage />
@@ -195,7 +196,11 @@ const EditCourseForm = ({
                     Category <span className="text-red-500">*</span>
                   </FormLabel>
                   <FormControl>
-                    <ComboBox options={categories} {...field} />
+                    <ComboBox
+                      options={categories}
+                      onChange={(value) => field.onChange(value)}
+                      value={field.value}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -218,7 +223,8 @@ const EditCourseForm = ({
                             category.value === form.watch("categoryId")
                         )?.subCategories || []
                       }
-                      {...field}
+                      onChange={(value) => field.onChange(value)}
+                      value={field.value}
                     />
                   </FormControl>
                   <FormMessage />
@@ -235,7 +241,11 @@ const EditCourseForm = ({
                     Level <span className="text-red-500">*</span>
                   </FormLabel>
                   <FormControl>
-                    <ComboBox options={levels} {...field} />
+                    <ComboBox
+                      options={levels}
+                      onChange={(value) => field.onChange(value)}
+                      value={field.value}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -285,7 +295,7 @@ const EditCourseForm = ({
             )}
           />
 
-          <div className="flex gap-5">
+          <div className="flex justify-end gap-5">
             <Link href="/instructor/courses">
               <Button variant="outline" type="button">
                 Cancel

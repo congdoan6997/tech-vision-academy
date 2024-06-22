@@ -55,11 +55,7 @@ export const columns: ColumnDef<Course>[] = [
       const isPublished = row.getValue("isPublished") || false;
 
       return (
-        <Badge
-          className={cn({
-            "bg-primary text-primary-foreground hover:bg-primary": isPublished,
-          })}
-        >
+        <Badge variant={isPublished ? "default" : "destructive"}>
           {isPublished ? "Published" : "Draft"}
         </Badge>
       );
@@ -70,7 +66,7 @@ export const columns: ColumnDef<Course>[] = [
     cell: ({ row }) => (
       <Link
         href={`/instructor/courses/${row.original.id}/basic`}
-        className="flex gap-2 items-center hover:text-[#FDAB04]"
+        className="flex gap-2 items-center hover:text-primary"
       >
         <Pencil className="h-4 w-4" /> Edit
       </Link>
